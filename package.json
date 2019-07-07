@@ -1,0 +1,41 @@
+{
+  "name": "wayfarer",
+  "version": "1.0.0",
+  "description": "booking server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel server -d build",
+    "start": "node build/index.js",    
+    "start:dev": "nodemon --exec babel-node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simpcyclassy/Wayfarer.git"
+  },
+  "author": "Chioma Onyekpere",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Simpcyclassy/Wayfarer/issues"
+  },
+  "homepage": "https://github.com/Simpcyclassy/Wayfarer#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
+    "@babel/node": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "@babel/register": "^7.4.4",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "express-generator": "^4.16.1",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  }
+}

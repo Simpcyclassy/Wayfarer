@@ -1,10 +1,22 @@
+import bodyParser from 'body-parser';
 import express from 'express';
+import http from 'http';
+import morgan from 'morgan';
+import { config } from 'dotenv';
 
+import users from '../routes/users';
+
+config();
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
+const server = http.createServer(app);
+const router = express.Router();
 
-app.get("/", (req, res) => {
-    res.send('Hey Andela');
-});
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-app.listen(PORT, () => console.log(`Server is listening on ${PORT}`));
+app.use('/', users);
+
+
+server.listen(PORT, () => console.log(`Listening on port ${PORT}`));

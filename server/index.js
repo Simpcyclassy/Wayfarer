@@ -1,22 +1,29 @@
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import jsend from 'jsend'; 
+import debug from 'debug';
 import express from 'express';
 import http from 'http';
 import morgan from 'morgan';
+import '@babel/polyfill';
 import { config } from 'dotenv';
 
-import users from '../routes/users';
-
+import usersRouter from '../routes';
 config();
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-const server = http.createServer(app);
 const router = express.Router();
+app.use(cookieParser());
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(jsend.middleware);
 
-app.use('/', users);
+app.use('/api/v1/user', usersRouter(router));
+app.get('*', (req, res) => res.jsend.success('Invana!!!'));
 
 
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+const server = http.createServer(app);
+server.listen(PORT, () => console.log(`App running on port ${PORT}`));

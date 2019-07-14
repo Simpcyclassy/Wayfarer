@@ -6,7 +6,7 @@ dotenv.config();
 
 const env = process.env.NODE_ENV;
 
-class Model {
+export class Model {
     constructor(table){
         this.table = table;
         this.pool = new Pool({
@@ -14,4 +14,35 @@ class Model {
         });
     }
 
+    async insert(columns, selector, values) {
+        const query = `INSERT INTO ${this.table} (${columns}) VALUES (${selector}) returning *`;
+        try {
+        const { rows } = await this.pool.query(query, values);
+        return rows;
+        } catch (err) {
+        throw err;
+        }
+    }
+    
+    async select(columns, clause,) {
+        const query = `SELECT ${columns} FROM ${this.table} WHERE ${clause}`;
+        const id = 'guid';
+        try {
+        const { rows } = await this.pool.query(query, [id]);
+        return rows;
+        } catch (err) {
+        throw err;
+        }
+    }
+    
+    async remove(clause) {
+        const query = `DELETE FROM ${this.table} WHERE ${clause}`;
+        try {
+        const { rows } = await this.pool.query(query);
+        return rows;
+        } catch (err) {
+        throw err;
+        }
+    }
+    
 };

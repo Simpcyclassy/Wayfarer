@@ -1,8 +1,8 @@
-import validator from '../middlewares/validator';
+import {validateSingupCredentials} from '../middlewares/validate';
 import users from '../controllers/users';
 
 export default function(router) {
-    router.post('/signup', validator.auth, users.signup);
+    router.post('/signup', validateSingupCredentials, users.signup);
 
     return router;
 }

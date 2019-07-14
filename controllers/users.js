@@ -1,30 +1,33 @@
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import securePassword from '../helpers/password';
+import models from '../models';
 
-import { Users } from '../models';
+const { Users } = models;
 
 export default {
   signup: async (req, res) => {
     const {
-      firstname, lastname, email, password
+      first_name, last_name, email
     } = req.body;
 
-    const foundUser = Users.list.find(user => user.email === email);
-    if (foundUser) return res.jsend.fail('Email address already exists.');
+    password = securePassword.hashPassword(password);
+    const checkUserexist = Users.list.find(user => user.email === email);
+    if (checkUserexist) return res.jsend.fail('Email already exist');
 
     const user = {
       id: Users.list.length + 1,
-      firstname,
-      lastname,
-      email,
-      password: await bcrypt.hash(password, 10)
+      first_name: checkUserexist[0].first_name,
+      last_name: checkUserexist[0].last_name,
+      email: checkUserexist[0].email,
     };
 
+    // persist user to database
     Users.create(user);
 
-    const token = jwt.sign({ userId: user.id }, process.env.SECRET);
+    // sign jwt and wrap in a cookie
+    const token = jwt.sign({ userId: user.id }, process.env.SECRET_TOKEN);
     res.cookie('token', token, { expires: new Date(Date.now() + 3600000), httpOnly: true });
 
     return res.jsend.success(token);
-  }
+  },
 };

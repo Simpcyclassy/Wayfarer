@@ -5,7 +5,7 @@ export default (req, res, next) => {
   if (!token) return res.jsend.error('Unauthenticated!');
 
   try {
-    const user = jwt.decode(token, process.env.SECRET);
+    const user = jwt.decode(token, process.env.SECRET_TOKEN);
     req.user = user;
     return next();
   } catch (error) {

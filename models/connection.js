@@ -24,11 +24,10 @@ export class Model {
         }
     }
     
-    async select(columns, clause,) {
-        const query = `SELECT ${columns} FROM ${this.table} WHERE ${clause}`;
-        const id = 'guid';
+    async select(columns, clause, values) {
+        const query = `SELECT ${columns} FROM ${this.table} WHERE ${clause} returning *`;
         try {
-        const { rows } = await this.pool.query(query, [id]);
+        const { rows } = await this.pool.query(query, values);
         return rows;
         } catch (err) {
         throw err;
@@ -36,7 +35,7 @@ export class Model {
     }
     
     async remove(clause) {
-        const query = `DELETE FROM ${this.table} WHERE ${clause}`;
+        const query = `DELETE FROM ${this.table} WHERE ${clause} returning *`;
         try {
         const { rows } = await this.pool.query(query);
         return rows;

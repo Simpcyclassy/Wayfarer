@@ -3,22 +3,24 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import http from 'http';
 import morgan from 'morgan';
-import { config } from 'dotenv';
-
-import usersRouter from '../routes';
-
-config();
+import config from '../config/config';
+import Routes from '../routes';
 
 const app = express();
-const PORT = parseInt(process.env.PORT, 10) || 5000;
-const router = express.Router();
+const { port, env } = config;
+// const PORT = parseInt(process.env.PORT, 10) || 5000;
 app.use(cookieParser());
 
 app.use(morgan('combined'));
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/api/v1/user', usersRouter(router));
+app.use('/api/v1', Routes);
 
-const server = http.createServer(app);
-server.listen(PORT, () => console.log(`App running on port ${PORT}`));
+app.get('/', (req, res ) => {
+    res.json({ message: 'default routes' });
+});
+
+app.listen(port, () => console.log(`app starting on port: ${port}`));
+
+export default app;

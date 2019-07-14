@@ -1,8 +1,10 @@
+import express from 'express';
+
 import {validateSingupCredentials} from '../middlewares/validate';
-import users from '../controllers/users';
+import User from '../controllers/users';
 
-export default function(router) {
-    router.post('/signup', validateSingupCredentials, users.signup);
+const router = express.Router();
 
-    return router;
-}
+router.post('/auth/signup', validateSingupCredentials, User.signUp);
+
+export default router;

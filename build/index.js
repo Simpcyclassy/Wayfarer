@@ -11,9 +11,9 @@ var _express = _interopRequireDefault(require("express"));
 
 var _morgan = _interopRequireDefault(require("morgan"));
 
-var _config = _interopRequireDefault(require("../config/config"));
+var _config = _interopRequireDefault(require("./config/config"));
 
-var _routes = _interopRequireDefault(require("../routes"));
+var _routes = _interopRequireDefault(require("./routes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 

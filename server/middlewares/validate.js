@@ -3,7 +3,7 @@ import Validator from 'validatorjs';
 const errorMessages = {
   required: 'the :attribute is required',
   email: 'the email format is invalid',
-  min: 'min :attribute limit is :min'
+  min: 'Min :attribute limit is :min'
 };
 
 const validate = (req, res, next, rules) => {

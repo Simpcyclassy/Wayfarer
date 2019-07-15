@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import express from 'express';
 // import http from 'http';
 import morgan from 'morgan';
-import config from '../config/config';
-import Routes from '../routes';
+import config from './config/config';
+import Routes from './routes';
 
 const app = express();
 const { port, env } = config;

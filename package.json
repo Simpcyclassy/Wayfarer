@@ -4,12 +4,12 @@
   "description": "booking server",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 15000 --recursive --require @babel/register --exit",
+    "test":  "mocha --timeout 15000 --recursive ./server --require @babel/register --exit",
     "prebuild": "rm -rf build/*",
-    "lint": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "lint":"./node_modules/.bin/eslint server --fix",
     "build": "babel server -d build",
     "start": "node build/index.js",
-    "start:dev": "nodemon --exec babel-node server/index.js"
+    "start:dev": "nodemon --exec babel-node -- ./server/index.js"
   },
   "repository": {
     "type": "git",

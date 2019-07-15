@@ -4,17 +4,10 @@
   "description": "booking server",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "mocha --timeout 15000 --recursive --require @babel/register --exit",
-    "prebuild": "rm -rf dist/*",
-    "lint": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "build": "babel server -d dist",
-=======
     "test":  "mocha --timeout 15000 --recursive ./server --require @babel/register --exit",
     "prebuild": "rm -rf build/*",
     "lint":"./node_modules/.bin/eslint server --fix",
     "build": "babel server -d build",
->>>>>>> ft-signup-rest-endpoints-167121532
     "start": "node build/index.js",
     "start:dev": "nodemon --exec babel-node -- ./server/index.js"
   },

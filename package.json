@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 15000 --recursive --require @babel/register --exit",
-    "prebuild": "rm -rf build/*",
+    "prebuild": "rm -rf dist/*",
     "lint": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "build": "babel server -d build",
+    "build": "babel server -d dist",
     "start": "node build/index.js",
     "start:dev": "nodemon --exec babel-node server/index.js"
   },

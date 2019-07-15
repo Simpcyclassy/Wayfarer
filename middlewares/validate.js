@@ -18,7 +18,7 @@ const validate = (req, res, next, rules) => {
   })
 };
 
-export const validateSingupCredentials = (req, res, next) => {
+export const validateSignupCredentials = (req, res, next) => {
   const rules = {
     first_name: 'required|alpha',
     last_name: 'required|alpha',
@@ -26,7 +26,16 @@ export const validateSingupCredentials = (req, res, next) => {
     email: 'required|email'
   }
   return validate(req, res, next, rules);
+};
+
+export const validateSigninCredentials = (req, res, next) => {
+  const rules = {
+    password: 'required|min:6',
+    email: 'required|email'
+  }
+  return validate(req, res, next, rules);
 }; 
+
 
 // import validationHelpers from '../helpers/validationHelpers';
 // import { emailRegex, passwordRegex } from '../helpers/regexen';

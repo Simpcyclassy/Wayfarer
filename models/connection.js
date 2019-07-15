@@ -7,7 +7,7 @@ dotenv.config();
 const env = process.env.NODE_ENV;
 
 export class Model {
-    constructor(table){
+    constructor(table) {
         this.table = table;
         this.pool = new Pool({
             connectionString: config.databaseUrl[env]

@@ -4,7 +4,7 @@
   "description": "booking server",
   "main": "index.js",
   "scripts": {
-    "test":  "mocha || true",
+    "test":  "mocha",
     "prebuild": "rm -rf build/*",
     "lint":"./node_modules/.bin/eslint server --fix",
     "build": "babel server -d build",

@@ -11,28 +11,29 @@ class User {
     static async signUp(req, res) {
       try {
         const {
-          email, first_name, last_name
+          email, first_name, last_name, is_admin
         } = req.body;
 
         let { password } = req.body;
         const token = createToken({
-          email, first_name, last_name
+          email, first_name, last_name, is_admin
         });
+
         password = securePassword.hashPassword(password);
-        console.log(password);
-        // const rows = await User.model().insert(
-        //   `email, first_name, last_name, password`,
-        //   `'${email}', '${first_name}', '${last_name}', '${password}'`
-        // );
+        const rows = await User.model().insert(
+          `email, first_name, last_name, password`,
+          `'${email}', '${first_name}', '${last_name}', '${password}'`
+        );
         
         return res.status(201).json({
           status: 'success',
           data: {
             token,
-            // id: id,
-            email: email,
-            first_name: first_name,
-            last_name: last_name
+            id: rows[0].id,
+            email: rows[0].email,
+            first_name: rows[0].first_name,
+            last_name: rows[0].last_name,
+            is_admin: rows[0].is_admin
           }
         });
 

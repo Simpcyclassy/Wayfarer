@@ -2,12 +2,10 @@ CREATE DATABASE wayfarer_api;
 
 CREATE TABLE users(
     id SERIAL NOT NULL PRIMARY KEY,
-    email VARCHAR(128) UNIQUE NOT NULL,
+    user_id SERIAL,
+    email VARCHAR NOT NULL UNIQUE,
     first_name VARCHAR NOT NULL,
     last_name VARCHAR NOT NULL,
-    is_admin BOOLEAN NOT NULL UNIQUE DEFAULT FALSE,\
-    password VARCHAR(128) NOT NULL,
-    created_date TIMESTAMP WITHOUT TIME ZONE DEFAULT (NOW() AT TIME ZONE 'WAT'),
-    modified_date TIMESTAMP WITHOUT TIME ZONE,
-    FOREIGN KEY (owner_id) REFERENCES users (id) ON DELETE CASCADE
+    password VARCHAR NOT NULL,
+    is_admin BOOLEAN NOT NULL DEFAULT false
 );

@@ -1,17 +1,24 @@
 import dotenv from 'dotenv';
-import {Pool} from 'pg';
-import config from '../config/config';
+import { Pool } from 'pg';
 
+const {
+    PG_HOST, PG_USER, PG_DATABASE, PG_PASSWORD, PG_PORT
+} = process.env;
 
 dotenv.config();
-const env = process.env.NODE_ENV;
-const pool = new Pool({connectionString: config.databaseUrl[env]});
+const pool = new Pool({
+    host: PG_HOST,
+    port: PG_PORT,
+    user: PG_USER,
+    password: PG_PASSWORD,
+    database: PG_DATABASE
+});
 
 pool.on('error', (err) => {
     console.log(err);
 });
 
-const migrate = pool.query (`DROP TABLE IF EXISTS users CASCADE;
+const migrate = pool.query(`DROP TABLE IF EXISTS users CASCADE;
     CREATE TABLE users (
         id SERIAL NOT NULL PRIMARY KEY,
         user_id SERIAL,

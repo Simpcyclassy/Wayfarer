@@ -18,7 +18,11 @@ const validate = (req, res, next, rules) => {
     });
 };
 
+<<<<<<< HEAD
 const validateSignupCredentials = (req, res, next) => {
+=======
+export const validateSingupCredentials = (req, res, next) => {
+>>>>>>> develop
     const rules = {
         first_name: 'required|alpha',
         last_name: 'required|alpha',

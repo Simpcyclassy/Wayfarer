@@ -18,7 +18,7 @@ const validate = (req, res, next, rules) => {
     });
 };
 
-const validateSingupCredentials = (req, res, next) => {
+export const validateSingupCredentials = (req, res, next) => {
     const rules = {
         first_name: 'required|alpha',
         last_name: 'required|alpha',
